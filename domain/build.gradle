@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation Androidx.coreKtx
     implementation Androidx.constraintLayout
+    implementation Androidx.androidCoroutines
 
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junitExt
