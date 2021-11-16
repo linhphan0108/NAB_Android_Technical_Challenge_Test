@@ -11,7 +11,7 @@ interface IForecastUseCase {
     /**
      * try to fetch any forecasts at the specified [cityName]
      */
-    suspend fun getForecast(cityName: String): Flow<ResultWrapper<List<ForecastEntity>>>
+    suspend fun getForecast(cityName: String, count: Int = 7): Flow<ResultWrapper<List<ForecastEntity>>>
 
     /**
      * delete all forecast records
@@ -22,7 +22,10 @@ interface IForecastUseCase {
 class ForecastUseCase @Inject constructor(private val repository: IForecastRepository) :
     IForecastUseCase {
 
-    override suspend fun getForecast(cityName: String): Flow<ResultWrapper<List<ForecastEntity>>> {
+    override suspend fun getForecast(
+        cityName: String,
+        count: Int
+    ): Flow<ResultWrapper<List<ForecastEntity>>> {
         return repository.getForecast(cityName)
     }
 
