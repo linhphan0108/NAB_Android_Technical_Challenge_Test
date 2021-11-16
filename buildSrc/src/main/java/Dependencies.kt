@@ -8,12 +8,13 @@ object Configs {
 }
 
 object Versions{
-
+    const val hilt_version = "2.40.1"
 }
 
 object TopLevelDependencies{
     const val gradleBuildTool = "com.android.tools.build:gradle:7.0.3"
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+    const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
 }
 
 object Androidx{
@@ -30,5 +31,6 @@ object TestDependencies{
 }
 
 object Others{
-
+    const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt_version}"
+    const val hiltAndroidCompiler =  "com.google.dagger:hilt-android-compiler:${Versions.hilt_version}"
 }
