@@ -13,6 +13,9 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField("String", "DOMAIN", "\"https://api.openweathermap.org/\"")
+        buildConfigField("String", "API_KEY", "\"60c6fbeb4b93ac653c492ba806fc346d\"")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -34,6 +37,7 @@ android {
 
 dependencies {
     implementation Androidx.coreKtx
+    implementation Androidx.androidCoroutines
 
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junitExt
@@ -42,6 +46,16 @@ dependencies {
     //dependency injection
     implementation Others.hiltAndroid
     kapt Others.hiltAndroidCompiler
+
+    //network
+    implementation Others.retrofit
+    implementation Others.retrofitGsonConverter
+    implementation Others.okhttpInterceptor
+
+    //local storage
+    implementation Others.roomCommon
+    kapt Others.roomCompiler
+    implementation Others.roomKtx
 
     implementation project(":common")
     implementation project(":domain")
