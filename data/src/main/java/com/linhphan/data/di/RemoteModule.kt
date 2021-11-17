@@ -2,10 +2,10 @@ package com.linhphan.data.di
 
 import android.content.Context
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.linhphan.common.Logger
 import com.linhphan.data.BuildConfig
-import com.linhphan.data.R
 import com.linhphan.data.remote.Services
+import com.linhphan.secureapi.APIKeyLibrary
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -43,14 +44,26 @@ class RemoteModule {
 
     @Provides
     @Singleton
+    @Named("appId")
+    fun provideAppId(): String {
+        return APIKeyLibrary.getAppId()
+    }
+
+    @Provides
+    @Singleton
     @Named("SSLCertificate")
     fun provideSSLCertificate(context: Context): List<Pair<String,String>> {
-        val domain = context.getString(R.string.domain)
-        return listOf(
-            Pair(domain, context.getString(R.string.cert1)),
-            Pair(domain, context.getString(R.string.cert2)),
-            Pair(domain, context.getString(R.string.cert3))
-        )
+        val list = mutableListOf<Pair<String, String>>()
+        val objects = APIKeyLibrary.getSSLCerts()
+        if (objects is ArrayList<*>){
+            objects.forEach {
+                if (it is android.util.Pair<*, *>){
+                    Logger.i("SSLCertificate", "domain = ${it.first} - cert = ${it.second}")
+                    list.add(Pair(it.first.toString(), it.second.toString()))
+                }
+            }
+        }
+        return list
     }
 
     @Provides

@@ -12,6 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -31,8 +32,10 @@ class DataModule {
     }
 
     @Provides
-    fun provideForecastData(db: ForecastDB, service: Services, gson: Gson, ioDispatcher: CoroutineDispatcher): IForecastRepository{
-        return ForecastRepository(db, service, gson, ioDispatcher)
+    fun provideForecastData(
+        db: ForecastDB, service: Services, gson: Gson,
+        @Named("appId") appId: String, ioDispatcher: CoroutineDispatcher): IForecastRepository{
+        return ForecastRepository(db, service, gson, appId, ioDispatcher)
     }
 
 }
