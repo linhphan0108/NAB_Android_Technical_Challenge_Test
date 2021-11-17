@@ -3,7 +3,6 @@ package com.linhphan.data.repository
 import com.google.gson.Gson
 import com.linhphan.common.DateTimeUtil
 import com.linhphan.common.Logger
-import com.linhphan.data.BuildConfig
 import com.linhphan.data.entity.ListForecastResponse
 import com.linhphan.data.extensions.toDate
 import com.linhphan.data.local.ForecastDB
@@ -18,11 +17,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Named
 
 class ForecastRepository @Inject constructor(
     private val db: ForecastDB,
     private val services: Services,
     private val gson: Gson,
+    @Named("appId") private val appId: String,
     ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): BaseRepository(ioDispatcher), IForecastRepository {
     override suspend fun getForecast(
@@ -44,7 +45,7 @@ class ForecastRepository @Inject constructor(
                 val response = services.getForecast(
                     query = cityName,
                     count = count,
-                    appId = BuildConfig.API_KEY
+                    appId = appId
                 )
                 storeForecasts(cityName, response, gson)
                 response
