@@ -16,19 +16,34 @@ abstract class BaseRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 )  {
 
-    suspend fun <T, E> safeApiCall(
+    /**
+     * this function assert that there is no exception thrown while running our query
+     * @param dbCall to query data from local database
+     * @param apiCall to fetching data from the remote server
+     * @param forceApiCall if true the [apiCall] will be always called despite whatever data returned from [dbCall]
+     * if [forceApiCall] returns false the [apiCall] will be called only if [dbCall] returns null.
+     */
+    suspend fun <T, E> safeCall(
         dispatcher: CoroutineDispatcher = ioDispatcher,
+        dbCall: suspend () -> E?,
         apiCall: suspend () -> T,
+        forceApiCall: (E) -> Boolean,
         mapper: (suspend (T) -> E)
     ): Flow<ResultWrapper<E>> {
         return flow {
-            val response = apiCall.invoke()
-            val result = if (response != null) {
-                ResultWrapper.Success(mapper.invoke(response))
-            } else {
-                ResultWrapper.GenericError(-1, MESSAGE_DATA_NULL)
+            //fetching cached data if available
+            val localData = dbCall.invoke()
+            if (localData == null || forceApiCall.invoke(localData)){
+                val response = apiCall.invoke()
+                val result = if (response != null) {
+                    ResultWrapper.Success(mapper.invoke(response))
+                } else {
+                    ResultWrapper.GenericError(-1, MESSAGE_DATA_NULL)
+                }
+                emit(result)
+            }else{
+                emit(ResultWrapper.Success(localData))
             }
-            emit(result)
         }.catch { throwable ->
             val errorResult = when (throwable) {
                 is IOException -> ResultWrapper.NetworkError

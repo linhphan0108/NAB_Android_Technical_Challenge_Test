@@ -1,5 +1,8 @@
 package com.linhphan.data.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.linhphan.data.local.ForecastDB
 import com.linhphan.data.remote.Services
 import com.linhphan.data.repository.ForecastRepository
 import com.linhphan.domain.repository.IForecastRepository
@@ -9,10 +12,18 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        val builder = GsonBuilder()
+        return builder.create()
+    }
 
     @Provides
     fun provideIoDispatcher(): CoroutineDispatcher {
@@ -20,8 +31,8 @@ class DataModule {
     }
 
     @Provides
-    fun provideForecastData(service: Services, ioDispatcher: CoroutineDispatcher): IForecastRepository{
-        return ForecastRepository(service, ioDispatcher)
+    fun provideForecastData(db: ForecastDB, service: Services, gson: Gson, ioDispatcher: CoroutineDispatcher): IForecastRepository{
+        return ForecastRepository(db, service, gson, ioDispatcher)
     }
 
 }

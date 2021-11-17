@@ -26,7 +26,7 @@ data class Coord (
 )
 
 data class ForecastResponse(
-    @SerializedName("dt") val dt: Long,
+    @SerializedName("dt") val dtInSeconds: Long,//in seconds not milliseconds
     @SerializedName("temp") val temp: TempResponse,
     @SerializedName("pressure") val pressure: Int,
     @SerializedName("humidity") val humidity: Int,

@@ -11,9 +11,4 @@ interface IForecastRepository {
      * @param count the number days that we going to fetch the forecasts for
      */
     suspend fun getForecast(cityName: String, count: Int = 7): Flow<ResultWrapper<List<ForecastEntity>>>
-
-    /**
-     * try to delete all forecasts that have stored.
-     */
-    suspend fun deleteForecast()
 }

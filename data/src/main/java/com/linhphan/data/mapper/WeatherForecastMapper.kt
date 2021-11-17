@@ -1,40 +1,44 @@
 package com.linhphan.data.mapper
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.linhphan.data.entity.ForecastResponse
-import com.linhphan.data.extensions.getAvgTemp
-import com.linhphan.data.extensions.toPercent
-import com.linhphan.data.extensions.toStringDate
+import com.linhphan.data.entity.TempResponse
+import com.linhphan.data.entity.WeatherResponse
+import com.linhphan.data.extensions.*
+import com.linhphan.data.extensions.millisToStringDate
+import com.linhphan.data.local.TblForecast
 import com.linhphan.domain.entity.ForecastEntity
 
-fun ForecastResponse.toWeatherInfo(): ForecastEntity {
+fun ForecastResponse.toForecastEntity(): ForecastEntity {
     return ForecastEntity(
-        date = dt.toStringDate(),
+        date = dtInSeconds.secondsToStringDate(),
         avgTemp = temp.getAvgTemp(),
         humidity = humidity.toPercent(),
-        pressure = pressure.toString(),
+        pressure = "$pressure%",
         desc = weathers.joinToString { weather -> weather.description }
     )
 }
 
-//fun ForecastResponse.toLocalWeatherInfo(cityName: String): LocalWeatherInfo {
-//    return LocalWeatherInfo(
-//        cityName = cityName,
-//        dt = dt,
-//        temp = temp.toJson(),
-//        humidity = humidity,
-//        pressure = pressure,
-//        weathers = weathers.toJson()
-//    )
-//}
+fun ForecastResponse.toTblForecast(cityName: String, gson: Gson): TblForecast {
+    return TblForecast(
+        cityName = cityName,
+        date = dtInSeconds * 1000,
+        temp = temp.toJson(gson),
+        humidity = humidity,
+        pressure = pressure,
+        weathers = weathers.toJson(gson)
+    )
+}
 
-//fun LocalWeatherInfo.toWeatherInfoResponse(): WeatherInfoResponse {
-//    return WeatherInfoResponse(
-//        dt = dt,
-//        temp = Gson().fromJson(temp, TempResponse::class.java),
-//        humidity = humidity,
-//        pressure = pressure,
-//        weathers = Gson().fromJson(
-//            weathers, object : TypeToken<List<WeatherDescResponse>?>() {}.type
-//        )
-//    )
-//}
+fun TblForecast.toForecastEntity(gson: Gson): ForecastEntity {
+    return ForecastEntity(
+        date = date.millisToStringDate(),
+        avgTemp = gson.fromJson(temp, TempResponse::class.java).getAvgTemp(),
+        humidity = humidity.toPercent(),
+        pressure = "$pressure%",
+        desc = (gson.fromJson(
+            weathers, object : TypeToken<List<WeatherResponse>?>() {}.type
+        ) as List<WeatherResponse>).joinToString { weather -> weather.description }
+    )
+}

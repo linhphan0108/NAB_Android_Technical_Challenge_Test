@@ -29,13 +29,6 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        val builder = GsonBuilder()
-        return builder.create()
-    }
-
-    @Provides
-    @Singleton
     fun provideConverterFactory(gson: Gson): Converter.Factory {
         return GsonConverterFactory.create(gson)
     }

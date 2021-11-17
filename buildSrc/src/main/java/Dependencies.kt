@@ -1,5 +1,6 @@
 import Versions.lifecycle_version
 import Versions.retrofit_version
+import Versions.room_version
 
 object Configs {
     const val applicationId = "com.linhphan.weatherforecast"
@@ -14,6 +15,7 @@ object Versions{
     const val hilt_version = "2.40.1"
     const val retrofit_version = "2.9.0"
     const val lifecycle_version = "2.4.0"
+    const val room_version = "2.3.0"
 }
 
 object TopLevelDependencies{
@@ -47,4 +49,9 @@ object Others{
     // hilt dependency injection
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt_version}"
     const val hiltAndroidCompiler =  "com.google.dagger:hilt-android-compiler:${Versions.hilt_version}"
+
+    //local storage
+    const val roomCommon = "androidx.room:room-common:$room_version"
+    const val roomCompiler = "androidx.room:room-compiler:$room_version"
+    const val roomKtx = "androidx.room:room-ktx:$room_version"
 }
