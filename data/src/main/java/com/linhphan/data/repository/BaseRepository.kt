@@ -33,7 +33,11 @@ abstract class BaseRepository(
         return flow {
             //fetching cached data if available
             val localData = dbCall.invoke()
+            if(localData != null){
+                emit(ResultWrapper.Success(localData))
+            }
             if (localData == null || forceApiCall.invoke(localData)){
+                emit(ResultWrapper.InProgress)
                 val response = apiCall.invoke()
                 val result = if (response != null) {
                     ResultWrapper.Success(mapper.invoke(response))
@@ -41,8 +45,6 @@ abstract class BaseRepository(
                     ResultWrapper.GenericError(-1, MESSAGE_DATA_NULL)
                 }
                 emit(result)
-            }else{
-                emit(ResultWrapper.Success(localData))
             }
         }.catch { throwable ->
             val errorResult = when (throwable) {
