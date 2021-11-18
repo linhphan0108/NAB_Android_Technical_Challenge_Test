@@ -45,6 +45,7 @@ dependencies {
     implementation Androidx.constraintLayout
     implementation Androidx.androidCoroutines
     implementation Androidx.lifecycleRuntime
+    implementation Androidx.viewModelLifecycle
 
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junitExt

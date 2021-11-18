@@ -1,5 +1,6 @@
 package com.linhphan.data.repository
 
+import com.linhphan.common.ApiResponseCode
 import com.linhphan.domain.entity.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,9 @@ abstract class BaseRepository(
             }
         }.catch { throwable ->
             val errorResult = when (throwable) {
-                is IOException -> ResultWrapper.NetworkError
+                is IOException -> {
+                    ResultWrapper.GenericError(ApiResponseCode.ERROR_NETWORK, "network error")
+                }
                 is HttpException -> {
                     val code = throwable.code()
                     val errorResponse = convertErrorBody(throwable)

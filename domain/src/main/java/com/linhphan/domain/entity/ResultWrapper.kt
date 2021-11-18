@@ -8,5 +8,9 @@ sealed class ResultWrapper<out T> {
     data class Success<out T>(val data: T): ResultWrapper<T>()
     data class GenericError(val code: Int, val message: String = "Unknown Error"): ResultWrapper<Nothing>()
     object InProgress : ResultWrapper<Nothing>()
-    object NetworkError: ResultWrapper<Nothing>()
+//    object NetworkError: ResultWrapper<Nothing>()
+
+    fun notProgress(): Boolean {
+        return this !is InProgress
+    }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
+    <string name="lp_hint_enter_city">city name (at least 3 letters)</string>
+    <string name="lp_label_get_weather">Get Weather</string>
+    <string name="lp_text_date">Date: %s</string>
+    <string name="lp_text_avg_temp">Average temperature: %s</string>
+    <string name="lp_text_pressure">Pressure: %s</string>
+    <string name="lp_text_humidity">Humidity: %s</string>
+    <string name="lp_text_desc">Description: %s</string>
 </resources>
