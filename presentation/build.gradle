@@ -24,12 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -38,6 +43,8 @@ dependencies {
     implementation Androidx.appCompat
     implementation Androidx.material
     implementation Androidx.constraintLayout
+    implementation Androidx.androidCoroutines
+    implementation Androidx.lifecycleRuntime
 
     testImplementation TestDependencies.junit4
     androidTestImplementation TestDependencies.junitExt
