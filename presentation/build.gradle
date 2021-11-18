@@ -47,6 +47,10 @@ dependencies {
     implementation Others.hiltAndroid
     kapt Others.hiltAndroidCompiler
 
+    // scalable size unit
+    implementation(Others.sdp)
+    implementation(Others.ssp)
+
     implementation project(":common")
     implementation project(":domain")
     implementation project(":data")

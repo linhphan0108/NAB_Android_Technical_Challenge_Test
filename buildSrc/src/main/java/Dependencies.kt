@@ -1,6 +1,7 @@
 import Versions.lifecycle_version
 import Versions.retrofit_version
 import Versions.room_version
+import Versions.scalable_unit_version
 
 object Configs {
     const val applicationId = "com.linhphan.weatherforecast"
@@ -16,6 +17,7 @@ object Versions{
     const val retrofit_version = "2.9.0"
     const val lifecycle_version = "2.4.0"
     const val room_version = "2.3.0"
+    const val scalable_unit_version = "1.0.6"
 }
 
 object TopLevelDependencies{
@@ -54,4 +56,8 @@ object Others{
     const val roomCommon = "androidx.room:room-common:$room_version"
     const val roomCompiler = "androidx.room:room-compiler:$room_version"
     const val roomKtx = "androidx.room:room-ktx:$room_version"
+
+    // provides a new size unit (scalable dp & sp).
+    const val sdp = "com.intuit.sdp:sdp-android:$scalable_unit_version"
+    const val ssp = "com.intuit.ssp:ssp-android:$scalable_unit_version"
 }
