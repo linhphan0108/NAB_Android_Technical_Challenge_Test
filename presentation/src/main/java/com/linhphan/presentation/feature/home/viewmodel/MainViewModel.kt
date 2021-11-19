@@ -6,13 +6,16 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.linhphan.common.ApiResponseCode
-import com.linhphan.common.Logger
 import com.linhphan.domain.entity.ResultWrapper
 import com.linhphan.domain.usecase.IForecastUseCase
+import com.linhphan.presentation.R
 import com.linhphan.presentation.base.BaseViewModel
+import com.linhphan.presentation.extensions.distinctUntilChanged
 import com.linhphan.presentation.extensions.temporaryLockView
+import com.linhphan.presentation.extensions.toast
 import com.linhphan.presentation.mapper.toWeatherInfoModel
 import com.linhphan.presentation.model.ForecastModel
 import com.linhphan.presentation.util.SingleLiveEvent
@@ -23,6 +26,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val MIN_QUERY_LENGTH = 3
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val forecastUseCase: IForecastUseCase,
@@ -37,11 +41,27 @@ class MainViewModel @Inject constructor(
     private val _forecasts = MutableLiveData<ResultWrapper<List<ForecastModel>>>()
     val forecastsObservable = _forecasts as LiveData<ResultWrapper<List<ForecastModel>>>
 
+    /**
+     * to handle the the get-weather button's state
+     * it's value is automatically updated
+     * once the city-name input's value changed on the event [onTextChanged]
+     */
+    private val _buttonState = MutableLiveData(false)
+    val buttonState = _buttonState.distinctUntilChanged()
+
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        if (event == null || event.action != KeyEvent.ACTION_DOWN)
+        if (v == null || event == null || event.action != KeyEvent.ACTION_DOWN)
             return false
+        if (validateQuery(v.text.toString()).not()){
+            v.toast(R.string.lp_message_error_min_length_require)
+            return false
+        }
         _onGetWeatherClick.call()
         return false
+    }
+
+    fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int){
+        _buttonState.value = validateQuery(s)
     }
 
     fun onButtonClicked(v: View) {
@@ -49,6 +69,9 @@ class MainViewModel @Inject constructor(
         _onGetWeatherClick.call()
     }
 
+    /**
+     * fetching forecasts from domain layer
+     */
     fun fetchForecasts(context: Context, cityName: String) {
         viewModelScope.launch {
             forecastUseCase.getForecast(cityName)
@@ -70,5 +93,14 @@ class MainViewModel @Inject constructor(
                     _forecasts.postValue(it)
                 }
         }
+    }
+
+    /**
+     * verify that a query is valid or not
+     * @return true if the query's length is at least 3 letters
+     * otherwise return false
+     */
+    private fun validateQuery(s: CharSequence): Boolean {
+        return s.trim().length >= MIN_QUERY_LENGTH
     }
 }

@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
 import com.linhphan.presentation.BuildConfig
 
 
@@ -28,6 +32,14 @@ fun View.visible() {
 
 fun View.invisible() {
     this.visibility = View.INVISIBLE
+}
+
+fun View.toast(@StringRes mesResId: Int, duration: Int = Toast.LENGTH_SHORT){
+    context.toast(context.getString(mesResId), duration)
+}
+
+fun View.toast(message: String, duration: Int = Toast.LENGTH_SHORT){
+    context.toast(message, duration)
 }
 
 fun View.enableTapToHideKeyboard() {
@@ -60,3 +72,6 @@ fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT){
 
 fun Context.toastLong(message: String, duration: Int = Toast.LENGTH_LONG)
         = toast(message, duration)
+
+////////////////////////////
+fun <T> LiveData<T>.distinctUntilChanged(): LiveData<T> = Transformations.distinctUntilChanged(this)

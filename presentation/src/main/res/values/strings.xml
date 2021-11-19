@@ -7,4 +7,5 @@
     <string name="lp_text_pressure">Pressure: %s</string>
     <string name="lp_text_humidity">Humidity: %s</string>
     <string name="lp_text_desc">Description: %s</string>
+    <string name="lp_message_error_min_length_require">the city name must be at least 3 letters</string>
 </resources>

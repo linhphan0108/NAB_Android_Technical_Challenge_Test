@@ -25,16 +25,18 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:singleLine="true"
+            android:onTextChanged="@{(text, start, before, count)-> viewModel.onTextChanged(text, start, before, count)}"
             android:onEditorAction="@{(view,actionId,event) -> viewModel.onEditorAction(view,actionId,event)}"
             />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_query"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lp_label_get_weather"
             android:textAllCaps="false"
             android:onClick="@{(v)-> viewModel.onButtonClicked(v)}"
+            android:enabled="@{viewModel.buttonState}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_city" />
 
