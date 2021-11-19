@@ -123,10 +123,17 @@ class MainViewModel @Inject constructor(
         return s.trim().length >= MIN_QUERY_LENGTH
     }
 
+    /**
+     * called right after [androidx.appcompat.app.ap.AppCompatActivity#onCreate(savedInstanceState: Bundle?)]
+     * or [com.linhphan.presentation.feature.home.ui.MainActivity#initData]
+     * in order to resume forecast for a specific [query]
+     * this function maybe called in the cast user has changed the text size for the entire app.
+     */
     fun resumeLastQuery(context: Context, query: String?){
         if (query == null) return
         if(validateQuery(query)){
             fetchForecasts(context, query)
+            _buttonState.value = true
             context.toast("resume last query | $query")
         }
     }
