@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/WeatherForecast/presentation/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/WeatherForecast/presentation/src/main/res/layout/lp_item_forecast.xml" value="0.1094224924012158" />
+        <entry key="..\:/AndroidStudioProjects/WeatherForecast/presentation/src/main/res/layout/lp_popup_text_size.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/WeatherForecast/presentation/src/main/res/menu/menu.xml" value="0.225" />
+        <entry key="..\:/AndroidStudioProjects/WeatherForecast/presentation/src/main/res/menu/menu_main.xml" value="0.225" />
       </map>
     </option>
   </component>
