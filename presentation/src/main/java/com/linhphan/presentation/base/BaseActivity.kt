@@ -1,6 +1,7 @@
 package com.linhphan.presentation.base
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -27,8 +28,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initDataBinding()
         initData()
+        initDataBinding()
         setupViews()
         setupObservers()
     }
@@ -67,6 +68,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         binding.lifecycleOwner = this@BaseActivity
     }
 
+    //#region network
     private var noNetworkPopup: SingleActionConfirmationPopup? = null
     private fun showNoNetworkConnectionPopup(){
         if (noNetworkPopup?.isShowing == true){
@@ -82,5 +84,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     private fun hideNoNetworkConnectionPopup(){
         noNetworkPopup?.dismiss()
+        noNetworkPopup = null
     }
+    //#endregion network
 }

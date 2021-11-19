@@ -34,6 +34,7 @@ object Androidx{
     const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     const val viewModelLifecycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_version}"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.6"
 }
 
 object TestDependencies{
@@ -56,6 +57,8 @@ object Others{
     const val roomCommon = "androidx.room:room-common:$room_version"
     const val roomCompiler = "androidx.room:room-compiler:$room_version"
     const val roomKtx = "androidx.room:room-ktx:$room_version"
+    //Safely manage keys and encrypt files and sharedpreferences
+    const val cryptoSharePreference = "androidx.security:security-crypto:1.1.0-alpha03"
 
     // provides a new size unit (scalable dp & sp).
     const val sdp = "com.intuit.sdp:sdp-android:$scalable_unit_version"

@@ -1,7 +1,9 @@
 package com.linhphan.presentation.feature.home.ui
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.linhphan.common.Logger
 import com.linhphan.domain.entity.ResultWrapper
 import com.linhphan.presentation.BR
 import com.linhphan.presentation.R
@@ -14,12 +16,23 @@ import com.linhphan.presentation.feature.home.adapter.ForecastAdapter
 import com.linhphan.presentation.feature.home.viewmodel.MainViewModel
 import com.linhphan.presentation.model.ForecastModel
 import dagger.hilt.android.AndroidEntryPoint
+import android.view.Menu
+import android.view.MenuItem
+import com.linhphan.common.Logger
+import com.linhphan.presentation.extensions.toast
+import com.linhphan.presentation.popup.textSizePopup.TextSizePopup
 
+private const val BUNDLE_KEY_QUERY = "BUNDLE_KEY_QUERY"
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     companion object{
         private const val tag = "MainActivity"
+        fun createIntent(context: Context, query: String?): Intent {
+            return Intent(context, MainActivity::class.java).apply {
+                putExtra(BUNDLE_KEY_QUERY, query)
+            }
+        }
     }
 
     private var foreCastAdapter = ForecastAdapter()
@@ -31,7 +44,31 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return BR.viewModel
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.lp_menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.text_size){
+            showTextSizePopup()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun initData() {
+        val lastScaleFactor = viewModel.getLastTextScaleFactor() * 0.01f
+        Logger.d(tag, "last scale factor = $lastScaleFactor")
+        viewModel.adjustFontScale(this, lastScaleFactor)
+        viewModel.setDefaultTextSize(this)
+
+        viewModel.resumeLastQuery(this, intent.extras?.getString(BUNDLE_KEY_QUERY))
+    }
+
     override fun setupViews() {
+        binding.edtCity.setText(intent.extras?.getString(BUNDLE_KEY_QUERY) ?: "")
         setupForecastRecycleView()
     }
 
@@ -42,6 +79,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         })
         viewModel.forecastsObservable.observe(this, {
             onGetForecastResult(it)
+        })
+        viewModel.onTextSizeChangeObservable.observe(this, {
+            viewModel.restartApplication(this, binding.edtCity.text.toString().trim())
         })
     }
 
@@ -98,6 +138,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.layoutError.visible()
         binding.tvMessage.text = getString(R.string.lp_message_error_holder, message)
         foreCastAdapter.clear()
+    }
+
+    private fun showTextSizePopup(){
+        TextSizePopup.show(supportFragmentManager)
     }
 
 }

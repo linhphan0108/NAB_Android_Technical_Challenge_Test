@@ -1,6 +1,9 @@
 package com.linhphan.presentation.base
 
+import android.app.Activity
 import android.content.Context
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.linhphan.common.Logger
 import com.linhphan.presentation.extensions.distinctUntilChanged
@@ -27,5 +30,15 @@ abstract class BaseViewModel: ViewModel() {
                 })
         }
         return _connectionState
+    }
+
+    fun adjustFontScale(activity: Activity, scaleFactor: Float) {
+        val configuration = activity.resources.configuration
+        configuration.fontScale = scaleFactor
+        val metrics = activity.resources.displayMetrics
+        val wm = activity.getSystemService(AppCompatActivity.WINDOW_SERVICE) as WindowManager
+        wm.defaultDisplay.getMetrics(metrics)
+        metrics.scaledDensity = configuration.fontScale * metrics.density
+        activity.baseContext.createConfigurationContext(configuration)
     }
 }

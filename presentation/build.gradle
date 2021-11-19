@@ -59,6 +59,9 @@ dependencies {
     implementation(Others.sdp)
     implementation(Others.ssp)
 
+    implementation(Others.cryptoSharePreference)
+    implementation(Androidx.fragmentKtx)
+
     implementation project(":common")
     implementation project(":domain")
     implementation project(":data")
