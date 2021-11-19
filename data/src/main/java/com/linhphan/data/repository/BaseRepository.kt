@@ -1,5 +1,6 @@
 package com.linhphan.data.repository
 
+import com.linhphan.common.ApiResponseCode
 import com.linhphan.domain.entity.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.io.IOException
+import javax.net.ssl.SSLException
 
 const val MESSAGE_UNKNOWN_ERROR = "Unknown Error"
 const val MESSAGE_DATA_NULL = "Data is null"
@@ -48,11 +50,16 @@ abstract class BaseRepository(
             }
         }.catch { throwable ->
             val errorResult = when (throwable) {
-                is IOException -> ResultWrapper.NetworkError
+                is SSLException -> {
+                    ResultWrapper.GenericError(ApiResponseCode.ERROR_NETWORK, throwable.message ?:"SSLException")
+                }
+                is IOException -> {
+
+                    ResultWrapper.GenericError(ApiResponseCode.ERROR_NETWORK, throwable.message ?:"network error")
+                }
                 is HttpException -> {
-                    val code = throwable.code()
                     val errorResponse = convertErrorBody(throwable)
-                    ResultWrapper.GenericError(code, errorResponse)
+                    ResultWrapper.GenericError(throwable.code(), errorResponse)
                 }
                 else -> {
                     val message = throwable.message ?: MESSAGE_UNKNOWN_ERROR

@@ -4,6 +4,7 @@
     package="com.linhphan.presentation">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".WeatherForecastApp"
@@ -16,7 +17,6 @@
         <activity
             android:name="com.linhphan.presentation.feature.home.ui.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

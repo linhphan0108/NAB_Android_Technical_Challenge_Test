@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
+    <string name="lp_hint_enter_city">city name (at least 3 letters)</string>
+    <string name="lp_label_get_weather">Get Weather</string>
+    <string name="lp_text_date">Date: %s</string>
+    <string name="lp_text_avg_temp">Average temperature: %s</string>
+    <string name="lp_text_pressure">Pressure: %s</string>
+    <string name="lp_text_humidity">Humidity: %s</string>
+    <string name="lp_text_desc">Description: %s</string>
+    <string name="lp_message_error_min_length_require">the city name must be at least 3 letters</string>
+    <string name="lp_message_empty_data">Oop!\nno forecasts found</string>
+    <string name="lp_message_error_holder">Oop!\nsomething went wrong\n%s</string>
+    <string name="lp_label_ok">ok</string>
+    <string name="lp_title_popup_error">Oops!</string>
+    <string name="lp_message_error_no_network_connection">Your network connection seems to be unstable. Please use WiFi or move to an area with better network quality</string>
 </resources>
