@@ -36,6 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun setupObservers() {
+        super.setupObservers()
         viewModel.onGetWeatherClickObservable.observe(this, {
             onGetWeatherButtonClicked()
         })

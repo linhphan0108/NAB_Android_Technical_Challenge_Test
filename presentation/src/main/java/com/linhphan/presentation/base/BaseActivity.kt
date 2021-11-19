@@ -6,12 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.linhphan.presentation.R
+import com.linhphan.presentation.popup.SingleActionConfirmationPopup
+import com.linhphan.presentation.util.connection.ConnectionState
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
 
     @get:LayoutRes
     protected abstract val layoutId: Int
+
+    private var connectionState: ConnectionState =
+        ConnectionState(
+            ConnectionState.CONNECTION_HAS_NOT_CHECK,
+            false
+        )
 
     protected val binding: T by lazy { getViewDataBindingInstance() }
     protected val viewModel: V by lazy { getViewModelInstance() }
@@ -27,7 +36,16 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected abstract fun getBindingVariableId(): Int
     protected open fun initData() {}
     protected open fun setupViews() {}
-    protected open fun setupObservers() {}
+    open fun setupObservers() {
+        viewModel.listenNetworkState(this, this)
+        viewModel.networkConnectionState?.observe(this, { networkState ->
+            if (networkState.isConnected) {
+                hideNoNetworkConnectionPopup()
+            } else {
+                showNoNetworkConnectionPopup()
+            }
+        })
+    }
 
     protected open fun getViewDataBindingInstance(): T {
         return DataBindingUtil.setContentView(this, layoutId)
@@ -49,4 +67,20 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         binding.lifecycleOwner = this@BaseActivity
     }
 
+    private var noNetworkPopup: SingleActionConfirmationPopup? = null
+    private fun showNoNetworkConnectionPopup(){
+        if (noNetworkPopup?.isShowing == true){
+            return
+        }
+        noNetworkPopup = SingleActionConfirmationPopup.Builder().apply {
+            setTitle(getString(R.string.lp_title_popup_error))
+            setMessage(getString(R.string.lp_message_error_no_network_connection))
+            setConfirm(getString(R.string.lp_label_ok))
+        }.build()
+        noNetworkPopup!!.show(this)
+    }
+
+    private fun hideNoNetworkConnectionPopup(){
+        noNetworkPopup?.dismiss()
+    }
 }
