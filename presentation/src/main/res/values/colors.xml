@@ -12,4 +12,6 @@
     <color name="colorDivider">#BDBDBD</color>
 
     <color name="colorPrimaryLight">#B2DFDB</color>
+    <color name="colorBgErrorLayout">#fff</color>
+    <color name="colorTextError">#D51A1A</color>
 </resources>

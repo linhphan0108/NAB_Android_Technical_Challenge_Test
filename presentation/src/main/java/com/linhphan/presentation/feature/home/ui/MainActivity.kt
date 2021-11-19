@@ -58,7 +58,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun onGetWeatherButtonClicked(){
-        //todo should invalidate the query here.
         val q = binding.edtCity.text.toString().trim()
         getForecasts(q)
         hideKeyboard()
@@ -85,13 +84,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun onGetForecastSuccess(data: List<ForecastModel>) {
+        if (data.isEmpty()){
+            binding.layoutError.visible()
+            binding.tvMessage.text = getString(R.string.lp_message_empty_data)
+        }else{
+            binding.layoutError.gone()
+        }
         foreCastAdapter.setData(data)
     }
 
     private fun onGetForecastError(code: Int, message: String) {
+        binding.layoutError.visible()
+        binding.tvMessage.text = getString(R.string.lp_message_error_holder, message)
         foreCastAdapter.clear()
-        //todo handle empty data
-        //todo handle error here
     }
 
 }

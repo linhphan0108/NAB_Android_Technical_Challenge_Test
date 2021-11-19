@@ -8,4 +8,6 @@
     <string name="lp_text_humidity">Humidity: %s</string>
     <string name="lp_text_desc">Description: %s</string>
     <string name="lp_message_error_min_length_require">the city name must be at least 3 letters</string>
+    <string name="lp_message_empty_data">Oop!\nno forecasts found</string>
+    <string name="lp_message_error_holder">Oop!\nsomething went wrong\n%s</string>
 </resources>

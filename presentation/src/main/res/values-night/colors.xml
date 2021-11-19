@@ -13,4 +13,6 @@
     <color name="colorDivider">#BDBDBD</color>
 
     <color name="colorPrimaryLight">#CFD8DC</color>
+    <color name="colorBgErrorLayout">@color/colorPrimary</color>
+    <color name="colorTextError">#D51A1A</color>
 </resources>
