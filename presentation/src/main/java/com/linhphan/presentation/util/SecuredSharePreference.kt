@@ -51,7 +51,7 @@ class SecuredSharePreference @Inject constructor(private val context: Context) {
 
     //
     fun getTextScaleFactor(): Int{
-        return getInt(KEY_TEXT_SCALE_FACTOR, 1)
+        return getInt(KEY_TEXT_SCALE_FACTOR, 100)// ~ 100%
     }
 
     fun saveTextScaleFactor(value: Int){
