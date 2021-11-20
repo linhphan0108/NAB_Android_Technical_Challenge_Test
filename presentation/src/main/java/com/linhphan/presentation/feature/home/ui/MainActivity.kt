@@ -62,8 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val lastScaleFactor = viewModel.getLastTextScaleFactor() * 0.01f
         Logger.d(tag, "last scale factor = $lastScaleFactor")
         viewModel.adjustFontScale(this, lastScaleFactor)
-        viewModel.setDefaultTextSize(this)
-
         viewModel.resumeLastQuery(this, intent.extras?.getString(BUNDLE_KEY_QUERY))
     }
 

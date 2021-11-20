@@ -1,6 +1,5 @@
 package com.linhphan.presentation.popup.textSizePopup
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.linhphan.presentation.R
 import com.linhphan.presentation.databinding.LpPopupTextSizeBinding
 import com.linhphan.presentation.feature.home.viewmodel.MainViewModel
@@ -33,20 +33,18 @@ class TextSizePopup: DialogFragment() {
     /**
      * this view model is shared from the host [com.linhphan.presentation.feature.home.ui.MainActivity]
      */
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModelMain: MainViewModel by activityViewModels()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        return dialog
-    }
+    private val viewModelTextSizePopup: TextSizePopupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding.viewModel = viewModel
+        binding.viewModel = viewModelTextSizePopup
         binding.lifecycleOwner = this
+        viewModelTextSizePopup.setDefaultTextSize(requireContext())
         return binding.root
     }
 
@@ -55,5 +53,12 @@ class TextSizePopup: DialogFragment() {
         val width = resources.getDimensionPixelSize(R.dimen._270sdp)
         val height = resources.getDimensionPixelSize(R.dimen._250sdp)
         dialog?.window?.setLayout(width, height)
+        setupObservers()
+    }
+
+    private fun setupObservers(){
+        viewModelTextSizePopup.onApplyTextSizeObservable.observe(viewLifecycleOwner, {
+            viewModelMain.onApplyNewTextScale(it)
+        })
     }
 }

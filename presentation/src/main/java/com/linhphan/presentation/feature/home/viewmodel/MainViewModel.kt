@@ -3,7 +3,6 @@ package com.linhphan.presentation.feature.home.viewmodel
 import android.content.Context
 import android.view.KeyEvent
 import android.view.View
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,7 +31,6 @@ import com.linhphan.presentation.feature.home.ui.MainActivity
 
 
 private const val MIN_QUERY_LENGTH = 3
-private const val MIN_TEXT_SCALE_FACTOR = 50 //~50%
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val forecastUseCase: IForecastUseCase,
@@ -48,15 +46,6 @@ class MainViewModel @Inject constructor(
     private val _forecasts = MutableLiveData<ResultWrapper<List<ForecastModel>>>()
     val forecastsObservable = _forecasts as LiveData<ResultWrapper<List<ForecastModel>>>
 
-    private val _textScaleProgress = MutableLiveData(0)
-    val textScaleProgressObservable = _textScaleProgress.distinctUntilChanged()
-    private val _textScale = MutableLiveData(0)
-    val textScaleObservable = _textScale.distinctUntilChanged()
-    private val _textSize = MutableLiveData(24f)
-    val textSizeObservable = _textSize.distinctUntilChanged()
-    private var defaultTextSize = 0f
-    private val _applyTextScaleButtonState = MutableLiveData(false)
-    val applyTextScaleButtonState = _applyTextScaleButtonState as LiveData<Boolean>
     private val _onTextSizeChange = SingleLiveEvent<Nothing>()
     val onTextSizeChangeObservable = _onTextSizeChange as LiveData<Nothing>
 
@@ -143,28 +132,7 @@ class MainViewModel @Inject constructor(
         return preference.getTextScaleFactor()
     }
 
-    fun setDefaultTextSize(context: Context){
-        val fontScale = context.resources.configuration.fontScale
-        val txt = TextView(context)
-        val scaledFactorPer = (fontScale * 100).toInt()
-        defaultTextSize = txt.textSize / fontScale
-        _textSize.value = defaultTextSize * fontScale
-        _textScale.value = scaledFactorPer
-        _textScaleProgress.value = scaledFactorPer - MIN_TEXT_SCALE_FACTOR
-    }
-
-    fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean){
-        if (progress == _textScaleProgress.value) return
-        val context = seekBar?.context ?: return
-        val expectedScale = progress * 0.01 + 0.5
-        _applyTextScaleButtonState.value = true
-        _textScale.value = progress + MIN_TEXT_SCALE_FACTOR
-        _textScaleProgress.value = progress
-        _textSize.value = (defaultTextSize * expectedScale).toFloat()
-    }
-
-    fun onApplyNewTextScale(){
-        val factor = _textScale.value ?: 100
+    fun onApplyNewTextScale(factor: Int){
         preference.saveTextScaleFactor(factor)
         _onTextSizeChange.call()
         Logger.d(tag, "onApplyNewTextScale | factor = $factor")

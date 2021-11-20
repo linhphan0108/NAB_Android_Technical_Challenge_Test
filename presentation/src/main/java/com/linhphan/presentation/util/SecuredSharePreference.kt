@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.linhphan.presentation.common.Constants.DEFAULT_SCALE_FACTOR_PERCENT
 import javax.inject.Inject
 
 private const val FILE_SECRET_SHARED_PREFERENCES = "FORECAST_SHARED_PREFERENCES"
@@ -51,7 +52,7 @@ class SecuredSharePreference @Inject constructor(private val context: Context) {
 
     //
     fun getTextScaleFactor(): Int{
-        return getInt(KEY_TEXT_SCALE_FACTOR, 100)// ~ 100%
+        return getInt(KEY_TEXT_SCALE_FACTOR, DEFAULT_SCALE_FACTOR_PERCENT)// ~ 100%
     }
 
     fun saveTextScaleFactor(value: Int){
