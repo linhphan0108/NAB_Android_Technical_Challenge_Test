@@ -1,4 +1,6 @@
+import Versions.kotlin_version
 import Versions.lifecycle_version
+import Versions.mockito_version
 import Versions.retrofit_version
 import Versions.room_version
 import Versions.scalable_unit_version
@@ -13,16 +15,18 @@ object Configs {
 }
 
 object Versions{
+    const val kotlin_version = "1.5.31"
     const val hilt_version = "2.40.1"
     const val retrofit_version = "2.9.0"
     const val lifecycle_version = "2.4.0"
     const val room_version = "2.3.0"
     const val scalable_unit_version = "1.0.6"
+    const val mockito_version = "4.0.0"
 }
 
 object TopLevelDependencies{
     const val gradleBuildTool = "com.android.tools.build:gradle:7.0.3"
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
 }
 
@@ -40,6 +44,11 @@ object Androidx{
 object TestDependencies{
     const val junit4 = "junit:junit:4.+"
     const val junitExt = "androidx.test.ext:junit:1.1.3"
+    const val mockitoCore = "org.mockito:mockito-core:${mockito_version}"
+    const val mockitoInline = "org.mockito:mockito-inline:${mockito_version}"
+    const val kotlinCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
+    const val kotlinJunitTest = "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
     const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
 }
 

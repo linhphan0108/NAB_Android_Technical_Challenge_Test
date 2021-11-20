@@ -1,6 +1,7 @@
 package com.linhphan.data.repository
 
 import com.linhphan.common.ApiResponseCode
+import com.linhphan.common.Logger
 import com.linhphan.domain.entity.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.io.IOException
+import java.lang.Exception
 import javax.net.ssl.SSLException
 
 const val MESSAGE_UNKNOWN_ERROR = "Unknown Error"
@@ -34,7 +36,7 @@ abstract class BaseRepository(
     ): Flow<ResultWrapper<E>> {
         return flow {
             //fetching cached data if available
-            val localData = dbCall.invoke()
+            val localData = safeRun{ dbCall.invoke() }
             if(localData != null){
                 emit(ResultWrapper.Success(localData))
             }
@@ -66,8 +68,18 @@ abstract class BaseRepository(
                     ResultWrapper.GenericError(-1, message)
                 }
             }
+            Logger.wtf("BaseRepository", throwable.message, throwable)
             emit(errorResult)
         }.flowOn(dispatcher)
+    }
+
+    private suspend fun <E> safeRun(task: suspend () -> E?): E?{
+        return try{
+            task.invoke()
+        }catch (e: Exception){
+            Logger.wtf("BaseRepository", e.message, e)
+            null
+        }
     }
 
     private fun convertErrorBody(throwable: HttpException): String {

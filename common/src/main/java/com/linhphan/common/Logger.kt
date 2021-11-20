@@ -11,85 +11,91 @@ object Logger {
 
     fun v(tag: String?, msg: String) {
         if (enable){
-            Log.v(tag, msg)
+            println("VERBOSE: $tag: $msg")
         }
     }
 
     fun v(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.v(tag, msg, tr)
+            println("VERBOSE: $tag: $msg")
+            tr?.printStackTrace()
         }
     }
 
     fun d(tag: String?, msg: String) {
         if (enable){
-            Log.d(tag, msg)
+            println("DEBUG: $tag: $msg")
         }
     }
 
     fun d(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.d(tag, msg, tr)
+            println("ERROR: $tag: $msg")
+            tr?.printStackTrace()
         }
     }
 
     fun i(tag: String?, msg: String) {
         if (enable){
-            Log.i(tag, msg)
+            println("INFO: $tag: $msg")
         }
     }
 
     fun i(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.i(tag, msg, tr)
+            println("INFO: $tag: ${tr?.message}")
+            tr?.printStackTrace()
         }
     }
 
     fun w(tag: String?, msg: String) {
         if (enable){
-            Log.w(tag, msg)
+            println("WARN: $tag: $msg")
         }
     }
 
     fun w(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.w(tag, msg, tr)
+            println("WARN: $tag: $msg")
+            tr?.printStackTrace()
         }
     }
 
     fun w(tag: String?, tr: Throwable?) {
         if (enable){
-            Log.w(tag, tr)
+            println("WARN: $tag: ${tr?.message}")
         }
     }
 
     fun e(tag: String?, msg: String) {
         if (enable){
-            Log.e(tag, msg)
+            println("ERROR: $tag: $msg")
         }
     }
 
     fun e(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.e(tag, msg, tr)
+            println("ERROR: $tag: $msg")
+            tr?.printStackTrace()
         }
     }
 
     fun wtf(tag: String?, msg: String?) {
         if (enable){
-            Log.wtf(tag, msg)
+            println("wtf: $tag: $msg")
         }
     }
 
     fun wtf(tag: String?, tr: Throwable) {
         if (enable){
-            Log.wtf(tag, tr)
+            println("wtf: $tag: ${tr.stackTraceToString()}")
         }
     }
 
     fun wtf(tag: String?, msg: String?, tr: Throwable?) {
         if (enable){
-            Log.wtf(tag, msg, tr)
+            println("wtf: $tag: $msg")
+            println("wtf: $tag: ${tr?.stackTraceToString()}")
         }
     }
 }

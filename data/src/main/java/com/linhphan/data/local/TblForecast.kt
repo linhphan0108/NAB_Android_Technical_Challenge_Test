@@ -6,7 +6,7 @@ import androidx.room.Entity
 @Entity(tableName = "tblForecast", primaryKeys = ["cityName", "date"])
 data class TblForecast(
     val cityName: String,
-    val date: Long,
+    val date: Long,//milliseconds
     @ColumnInfo(name = "temperature")
     val temp: String,
     val pressure: Int,
