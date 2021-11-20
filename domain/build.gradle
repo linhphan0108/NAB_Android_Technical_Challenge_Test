@@ -38,8 +38,12 @@ dependencies {
     implementation Androidx.androidCoroutines
 
     testImplementation TestDependencies.junit4
-    androidTestImplementation TestDependencies.junitExt
-    androidTestImplementation TestDependencies.espresso
+    testImplementation TestDependencies.mockitoCore
+    testImplementation TestDependencies.mockitoInline
+    testImplementation TestDependencies.kotlinCoroutinesTest
+    testImplementation TestDependencies.kotlinJunitTest
+//    androidTestImplementation TestDependencies.junitExt
+//    androidTestImplementation TestDependencies.espresso
 
     //dependency injection
     implementation Others.hiltAndroid
