@@ -14,7 +14,9 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:contentDescription="@string/lp_talkback_text_size_popup">
 
         <TextView
             android:id="@+id/tvTextSize"
@@ -22,6 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/_16ssp"
             android:text="@{String.format(@string/lp_label_percent_holder, viewModel.textScaleObservable)}"
+            android:contentDescription="@{String.format(@string/lp_talkback_current_text_size, viewModel.textScaleObservable)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +34,9 @@
             android:id="@+id/seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
             android:progress="@{viewModel.textScaleProgressObservable}"
             android:secondaryProgress="150"
             android:max="150"
@@ -45,7 +51,7 @@
             android:id="@+id/tvSampleText"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_16sdp"
             android:gravity="center_horizontal"
             android:textSize="@{viewModel.textSizeObservable}"
@@ -63,6 +69,7 @@
             android:onClick="@{()-> viewModel.onApplyNewTextScale()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
