@@ -127,6 +127,11 @@ The Secure Sockets Layer (SSL)—now technically known as Transport Layer Securi
 
 How did you integrate HTTPS and SSL? see [RemoteModule#provideOkHttpClient](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/main/java/com/linhphan/data/di/RemoteModule.kt)
 
+## Other security technique
+1. preventing rooted devices from using the app.
+
+2. Enabling proguard
+
 ## Theme structure supports night mode
 Dark theme is available in Android 10 (API level 29) and higher. It has many benefits:
 
