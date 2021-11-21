@@ -1,10 +1,8 @@
-package com.linhphan.presentation.popup
+package com.linhphan.presentation.feature.popup
 
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
 import android.view.*
 import android.widget.Button

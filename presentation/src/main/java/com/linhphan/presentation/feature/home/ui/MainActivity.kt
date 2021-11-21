@@ -2,7 +2,6 @@ package com.linhphan.presentation.feature.home.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.linhphan.domain.entity.ResultWrapper
 import com.linhphan.presentation.BR
@@ -19,8 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.view.Menu
 import android.view.MenuItem
 import com.linhphan.common.Logger
-import com.linhphan.presentation.extensions.toast
-import com.linhphan.presentation.popup.textSizePopup.TextSizePopup
+import com.linhphan.presentation.feature.popup.textSizePopup.TextSizePopup
 
 private const val BUNDLE_KEY_QUERY = "BUNDLE_KEY_QUERY"
 @AndroidEntryPoint

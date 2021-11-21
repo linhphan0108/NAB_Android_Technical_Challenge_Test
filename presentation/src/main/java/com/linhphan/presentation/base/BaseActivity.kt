@@ -1,14 +1,13 @@
 package com.linhphan.presentation.base
 
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.linhphan.presentation.R
-import com.linhphan.presentation.popup.SingleActionConfirmationPopup
+import com.linhphan.presentation.feature.popup.SingleActionConfirmationPopup
 import com.linhphan.presentation.util.connection.ConnectionState
 import java.lang.reflect.ParameterizedType
 

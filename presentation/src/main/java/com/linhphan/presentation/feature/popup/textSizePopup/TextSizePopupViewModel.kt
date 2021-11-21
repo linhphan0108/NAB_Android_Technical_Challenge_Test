@@ -1,4 +1,4 @@
-package com.linhphan.presentation.popup.textSizePopup
+package com.linhphan.presentation.feature.popup.textSizePopup
 
 import android.content.Context
 import android.widget.SeekBar

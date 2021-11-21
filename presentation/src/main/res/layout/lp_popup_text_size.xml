@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.linhphan.presentation.popup.textSizePopup.TextSizePopupViewModel" />
+            type="com.linhphan.presentation.feature.popup.textSizePopup.TextSizePopupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
