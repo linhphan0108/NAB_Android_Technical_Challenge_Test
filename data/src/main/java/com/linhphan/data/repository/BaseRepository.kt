@@ -48,6 +48,7 @@ abstract class BaseRepository(
                 } else {
                     ResultWrapper.GenericError(-1, MESSAGE_DATA_NULL)
                 }
+                Logger.wtf("BaseRepository", "safeCall | result = $result")
                 emit(result)
             }
         }.catch { throwable ->
@@ -68,7 +69,7 @@ abstract class BaseRepository(
                     ResultWrapper.GenericError(-1, message)
                 }
             }
-            Logger.wtf("BaseRepository", throwable.message, throwable)
+            Logger.wtf("BaseRepository", "safeCall ${throwable.message}", throwable)
             emit(errorResult)
         }.flowOn(dispatcher)
     }
@@ -77,7 +78,7 @@ abstract class BaseRepository(
         return try{
             task.invoke()
         }catch (e: Exception){
-            Logger.wtf("BaseRepository", e.message, e)
+            Logger.wtf("BaseRepository", "safeRun | ${e.message}", e)
             null
         }
     }
