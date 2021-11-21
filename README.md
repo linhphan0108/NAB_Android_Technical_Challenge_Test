@@ -1,6 +1,6 @@
 # Weather Forecast applies MVVM combined with [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 ## Hello World!
-**Hello** this is my simple **Weather Forecast** project as a applicant's assignment for applying for the Android developer position at [Viet Nam Technology Center
+**Hello** this is my simple **Weather Forecast** project as a applicant's challenging assignment for applying for the Android developer position at [Viet Nam Technology Center
 National Australia Bank Limited
 ](https://www.nab.com.au/corporate/global-relationships/contact-us).
 
@@ -232,6 +232,12 @@ In Weather Forecast, themes are structure as in the diagram:
 </resources>
 
 ```
+## Accessibility supports
+
+1. Talkback: Weather Forecast has contentDescription for supporting the screen reader.
+
+2. Scaling Text: Weather Foreast allows user to change the text size for entire app.
+
 ## Testing
 Local Test using junit4 and mockito
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/test/java/com/linhphan/data/repository/ForecastRepositoryTest.kt)
