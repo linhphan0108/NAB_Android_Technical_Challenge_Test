@@ -15,32 +15,32 @@ open class SingleActionConfirmationPopup(builder: Builder) {
     private var title: String? = null
     private var message: CharSequence? = null
     private var confirmLabel: String? = null
+    private var cancelable: Boolean = true
 
-    private var confirmActionCallback: Listeners? = null
+    private var confirmActionCallback: (() -> Unit)? = null
 
     val isShowing: Boolean
         get() = mDialog != null && mDialog!!.isShowing
 
-    interface Listeners {
-        fun onConfirmationClicked()
-    }
-
     init {
         title = builder.title
         message = builder.message
+        cancelable = builder.cancelable
         confirmLabel = builder.confirmLabel
         confirmActionCallback = builder.confirmActionCallback
     }
 
 
     fun show(context: Context) {
-        mDialog = createDialog(context)
+        mDialog = createDialog(context).apply {
+            setCancelable(cancelable)
+        }
         val tvDialogTitle = mDialog!!.findViewById(R.id.tv_title) as TextView
         val tvDialogContent = mDialog!!.findViewById(R.id.tv_message) as TextView
         val btnOK = mDialog!!.findViewById(R.id.btn_ok) as Button
 
         btnOK.setOnClickListener {
-            confirmActionCallback?.onConfirmationClicked()
+            confirmActionCallback?.invoke()
             dismiss()
         }
 
@@ -75,7 +75,8 @@ open class SingleActionConfirmationPopup(builder: Builder) {
         internal var title: String? = null
         internal var message: String? = null
         internal var confirmLabel: String? = null
-        internal var confirmActionCallback: Listeners? = null
+        internal var cancelable: Boolean = true
+        internal var confirmActionCallback: (() -> Unit)? = null
 
         fun build(): SingleActionConfirmationPopup {
             return SingleActionConfirmationPopup(this)
@@ -91,9 +92,14 @@ open class SingleActionConfirmationPopup(builder: Builder) {
             return this
         }
 
-        fun setConfirm(confirmLabel: String, listener: Listeners? = null): Builder {
+        fun setCancelable(cancelable: Boolean): Builder {
+            this.cancelable = cancelable
+            return this
+        }
+
+        fun setConfirm(confirmLabel: String, callback: (() -> Unit)? = null): Builder {
             this.confirmLabel = confirmLabel
-            this.confirmActionCallback = listener
+            this.confirmActionCallback = callback
             return this
         }
     }

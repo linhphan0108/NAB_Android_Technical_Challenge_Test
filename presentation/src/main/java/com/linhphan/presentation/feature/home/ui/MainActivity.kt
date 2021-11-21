@@ -2,6 +2,7 @@ package com.linhphan.presentation.feature.home.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.linhphan.domain.entity.ResultWrapper
 import com.linhphan.presentation.BR
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.view.Menu
 import android.view.MenuItem
 import com.linhphan.common.Logger
+import com.linhphan.presentation.extensions.isRootedDevice
 import com.linhphan.presentation.feature.popup.textSizePopup.TextSizePopup
 
 private const val BUNDLE_KEY_QUERY = "BUNDLE_KEY_QUERY"
@@ -40,6 +42,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun getBindingVariableId(): Int {
         return BR.viewModel
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (isRootedDevice()){
+            showPopupRootedDevice()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

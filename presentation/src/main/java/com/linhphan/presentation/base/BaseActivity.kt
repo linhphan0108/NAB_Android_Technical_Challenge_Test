@@ -1,6 +1,9 @@
 package com.linhphan.presentation.base
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.linhphan.presentation.R
 import com.linhphan.presentation.feature.popup.SingleActionConfirmationPopup
 import com.linhphan.presentation.util.connection.ConnectionState
+import java.io.File
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
@@ -86,4 +90,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         noNetworkPopup = null
     }
     //#endregion network
+
+    protected fun showPopupRootedDevice(){
+        SingleActionConfirmationPopup.Builder().apply {
+            setCancelable(false)
+            setTitle(getString(R.string.lp_title_popup_error))
+            setMessage(getString(R.string.lp_message_error_rooted_device))
+            setConfirm(getString(R.string.lp_label_ok)){
+                finish()
+            }
+        }.build().show(this)
+    }
 }
