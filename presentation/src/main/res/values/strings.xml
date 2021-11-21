@@ -13,6 +13,7 @@
     <string name="lp_label_ok">OK</string>
     <string name="lp_title_popup_error">Oops!</string>
     <string name="lp_message_error_no_network_connection">Your network connection seems to be unstable. Please use WiFi or move to an area with better network quality</string>
+    <string name="lp_message_error_rooted_device">We really sorry that, for protecting users\' data, we don\'t devices that have rooted.\nPlease try on another device.</string>
     <string name="lp_sample_text">the text will be look like this.\ndrag the slider to left or right to decrease or increase the text size</string>
     <string name="lp_label_apply">apply</string>
     <string name="lp_label_percent_holder">%d%%</string>
