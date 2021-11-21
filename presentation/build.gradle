@@ -5,6 +5,14 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+// Creates a variable called keystorePropertiesFile, and initializes it to the
+// keystore.properties file.
+def keystorePropertiesFile = project.rootProject.file("keystore.properties")
+// Initializes a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+// Loads the keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdk Configs.compileSdkVersion
 
@@ -18,9 +26,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['RELEASE_KEY_ALIAS']
+            keyPassword keystoreProperties['RELEASE_KEY_PASSWORD']
+            storeFile file(keystoreProperties['RELEASE_STORE_FILE'])
+            storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
