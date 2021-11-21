@@ -7,11 +7,4 @@
         <item name="android:buttonStyle">@style/MyButtonStyle</item>
     </style>
     <!-- end base theme-->
-
-    <!-- platform theme-->
-    <style name="Platform.Theme.LP" parent="Platform.V21.Theme.LP" />
-    <style name="Platform.V21.Theme.LP" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!--        <item name="android:fontFamily">?attr/blsFontRegular</item>-->
-    </style>
-    <!-- end platform theme-->
 </resources>
