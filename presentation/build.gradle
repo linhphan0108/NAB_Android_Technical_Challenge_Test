@@ -56,6 +56,11 @@ android {
     buildFeatures {
         dataBinding true
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -67,9 +72,26 @@ dependencies {
     implementation Androidx.lifecycleRuntime
     implementation Androidx.viewModelLifecycle
 
+    // Dependencies for local unit tests
     testImplementation TestDependencies.junit4
-    androidTestImplementation TestDependencies.junitExt
-    androidTestImplementation TestDependencies.espresso
+    testImplementation TestDependencies.kotlinCoroutinesTest
+    testImplementation TestDependencies.truth
+    testImplementation TestDependencies.robolectric
+    testImplementation TestDependencies.mockitoCore
+    testImplementation TestDependencies.mockitoInline
+
+    // AndroidX Test - JVM testing
+    testImplementation TestDependencies.androidxCoreKtx
+    testImplementation TestDependencies.androidxCoreTesting
+    testImplementation TestDependencies.androidxExtJunit
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation TestDependencies.androidxCoreKtx
+    androidTestImplementation TestDependencies.androidxTestRunner
+    androidTestImplementation TestDependencies.androidxTestRule
+    androidTestImplementation TestDependencies.androidxCoreTesting
+    androidTestImplementation TestDependencies.truth
+    androidTestImplementation TestDependencies.mockitoDexMark
 
     //dependency injection
     implementation Others.hiltAndroid

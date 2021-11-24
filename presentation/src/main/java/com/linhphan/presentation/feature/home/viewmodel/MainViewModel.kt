@@ -123,7 +123,7 @@ class MainViewModel @Inject constructor(
         if(validateQuery(query)){
             fetchForecasts(context, query)
             _buttonState.value = true
-            context.toast("resume last query | $query")
+            Logger.i(tag,"resume last query | $query")
         }
     }
 
