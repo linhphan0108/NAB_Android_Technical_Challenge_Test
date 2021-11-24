@@ -1,3 +1,4 @@
+import Versions.androidx_test_version
 import Versions.kotlin_version
 import Versions.lifecycle_version
 import Versions.mockito_version
@@ -22,6 +23,7 @@ object Versions{
     const val room_version = "2.3.0"
     const val scalable_unit_version = "1.0.6"
     const val mockito_version = "4.0.0"
+    const val androidx_test_version = "1.4.0"
 }
 
 object TopLevelDependencies{
@@ -42,13 +44,22 @@ object Androidx{
 }
 
 object TestDependencies{
-    const val junit4 = "junit:junit:4.+"
+    const val junit4 = "junit:junit:4.13.2"
     const val junitExt = "androidx.test.ext:junit:1.1.3"
     const val mockitoCore = "org.mockito:mockito-core:${mockito_version}"
     const val mockitoInline = "org.mockito:mockito-inline:${mockito_version}"
     const val kotlinCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
     const val kotlinJunitTest = "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    const val truth = "com.google.truth:truth:1.1.2"
+    const val robolectric = "org.robolectric:robolectric:4.6"
 
+    const val androidxCoreTesting = "androidx.arch.core:core-testing:2.1.0"
+    const val androidxCoreKtx = "androidx.test:core-ktx:$androidx_test_version"
+    const val androidxExtJunit = "androidx.test.ext:junit:1.1.3"
+    const val androidxTestRunner = "androidx.test:runner:$androidx_test_version"
+    const val androidxTestRule = "androidx.test:rules:$androidx_test_version"
+
+    const val mockitoDexMark = "com.linkedin.dexmaker:dexmaker-mockito-inline:2.28.1"
     const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
 }
 
