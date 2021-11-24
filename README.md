@@ -244,11 +244,11 @@ In Weather Forecast, themes are structure as in the diagram:
 2. Scaling Text: Weather Foreast allows user to change the text size for entire app.
 
 ## Testing
-Local Test using junit4 and mockito
+Local tests using junit4 and mockito
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/test/java/com/linhphan/data/repository/ForecastRepositoryTest.kt)
 and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/domain/src/test/java/com/linhphan/domain/usecase/ForecastUseCaseTest.kt)
 
-Local test using Robolectric with AndroidJunit4 + AndroidX Test APIs
+Instrumented tests using Robolectric with AndroidJunit4 + AndroidX Test APIs
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/test/java/com/linhphan/presentation/feature)
 and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature/home/viewmodel)
 
