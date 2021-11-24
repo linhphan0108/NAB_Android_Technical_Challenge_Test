@@ -248,6 +248,10 @@ Local Test using junit4 and mockito
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/test/java/com/linhphan/data/repository/ForecastRepositoryTest.kt)
 and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/domain/src/test/java/com/linhphan/domain/usecase/ForecastUseCaseTest.kt)
 
+Local test using Robolectric with AndroidJunit4 + AndroidX Test APIs
+[see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/test/java/com/linhphan/presentation/feature)
+and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature/home/viewmodel)
+
 ## How to Run
 1. Clone the project down to your computer.
 2. Open it in Android Studio (Android Studio 4.0 or newer are recommended)
@@ -310,6 +314,9 @@ Thanks ❤️ and happy coding! 💻
 
 ## References
 [Clean Architecture + MVVM](https://medium.com/huawei-developers/android-clean-app-base-library-clean-architecture-mvvm-part-i-e8614978877f)
+
 [Better Android Apps Using MVVM with Clean Architecture](https://www.toptal.com/android/android-apps-mvvm-with-clean-architecture)
+
 [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+
 [Refactoring Android Themes with Style](https://medium.com/monzo-bank/refactoring-android-themes-with-style-restructuring-themes-15230569e50)
