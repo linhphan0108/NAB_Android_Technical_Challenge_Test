@@ -59,8 +59,12 @@ object TestDependencies{
     const val androidxTestRunner = "androidx.test:runner:$androidx_test_version"
     const val androidxTestRule = "androidx.test:rules:$androidx_test_version"
 
+    const val hiltAndroidTest = "com.google.dagger:hilt-android-testing:${Versions.hilt_version}"
+
     const val mockitoDexMark = "com.linkedin.dexmaker:dexmaker-mockito-inline:2.28.1"
     const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
+    const val fragmentTest = "androidx.fragment:fragment-testing:$androidx_test_version"
+    const val hamcrest = "org.hamcrest:hamcrest-all:1.3"
 }
 
 object Others{
