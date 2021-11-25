@@ -4,6 +4,7 @@
 National Australia Bank Limited
 ](https://www.nab.com.au/corporate/global-relationships/contact-us).
 
+In this project I apply MVVM in combination with clean architecture and more...
 ## MVVM (Model–View–ViewModel)
 MVVM is now one of the most loved patterns out there, as it has had plenty of time to mature. The web community adopted the pattern after the Microsoft team formalized it in 2005. It eventually made its way into every UI-based framework.
 One key advantage of MVVM is that it offers the right amount of decoupling. Another good thing is that the learning curve is similar to the other patterns.
@@ -251,6 +252,9 @@ and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/b
 Instrumented tests using Robolectric with AndroidJunit4 + AndroidX Test APIs
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/test/java/com/linhphan/presentation/feature)
 and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature/home/viewmodel)
+
+Ui tests using Expresso
+[see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature)
 
 ## How to Run
 1. Clone the project down to your computer.
