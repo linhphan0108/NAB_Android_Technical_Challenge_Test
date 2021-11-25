@@ -13,10 +13,20 @@ abstract class ForecastDB : RoomDatabase() {
     companion object {
 
         private const val DATABASE_NAME = "WeatherForecast"
+        @Volatile
+        private var INSTANCE: ForecastDB? = null
 
         fun build(context: Context): ForecastDB {
-            return Room.databaseBuilder(context, ForecastDB::class.java, DATABASE_NAME)
-                .build()
+            synchronized(this) {
+                var instance = INSTANCE
+                if (instance == null) {
+                    instance = Room.databaseBuilder(context.applicationContext, ForecastDB::class.java, DATABASE_NAME)
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
         }
     }
 }

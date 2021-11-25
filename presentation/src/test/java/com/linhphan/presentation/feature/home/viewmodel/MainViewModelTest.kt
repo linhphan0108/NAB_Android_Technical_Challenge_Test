@@ -11,6 +11,7 @@ import com.linhphan.domain.usecase.IForecastUseCase
 import com.linhphan.presentation.extensions.getOrAwaitValue
 import com.linhphan.presentation.model.ForecastModel
 import com.linhphan.presentation.util.SecuredSharePreference
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
@@ -26,6 +27,7 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
 @ExperimentalCoroutinesApi
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest {
 
