@@ -8,8 +8,10 @@ import com.linhphan.data.local.ForecastDao
 import com.linhphan.data.local.TblForecast
 import com.linhphan.data.mapper.toTblForecast
 import com.linhphan.data.remote.Services
+import com.linhphan.data.testRule.MainCoroutineRule
 import com.linhphan.domain.entity.ResultWrapper
 import com.linhphan.domain.repository.IForecastRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.toList
@@ -17,6 +19,7 @@ import kotlinx.coroutines.test.*
 
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -32,11 +35,8 @@ private const val tag = "ForecastRepositoryTest"
 @RunWith(MockitoJUnitRunner::class)
 class ForecastRepositoryTest {
 
-//    @ExperimentalCoroutinesApi
-    private val testDispatcher = TestCoroutineDispatcher()
-
-//    @get:Rule
-//    var mainCoroutineRule = MainCoroutineRule()
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     @Mock
     private lateinit var database: ForecastDB
@@ -51,26 +51,20 @@ class ForecastRepositoryTest {
 
     @Before
     fun setUp() {
-
-        //Dispatchers.setMain(testDispatcher)
-
         MockitoAnnotations.openMocks(ForecastRepositoryTest::class)
-
-        repository = ForecastRepository(database, service, gson, appId, testDispatcher)
+        repository = ForecastRepository(database, service, gson, appId, Dispatchers.Main)
         Mockito.`when`(database.getForecastDao())
             .thenReturn(Mockito.mock(ForecastDao::class.java))
     }
 
     @After
     fun tearDown() {
-//        Dispatchers.resetMain()
-//        testDispatcher.cleanupTestCoroutines()
     }
 
     //#region success test
     @Test
     fun `getForecast success from local only`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()
@@ -90,7 +84,7 @@ class ForecastRepositoryTest {
 
     @Test
     fun `getForecast success from remote only`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()
@@ -118,7 +112,7 @@ class ForecastRepositoryTest {
 
     @Test
     fun `getForecast success from both local and remote`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()
@@ -152,7 +146,7 @@ class ForecastRepositoryTest {
     //#region error test
     @Test
     fun `getForecast local error but remote success`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()
@@ -180,7 +174,7 @@ class ForecastRepositoryTest {
 
     @Test
     fun `getForecast local success but remote error`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()
@@ -206,7 +200,7 @@ class ForecastRepositoryTest {
 
     @Test
     fun `getForecast error both local and remote`() {
-        runBlockingTest {
+        mainCoroutineRule.runBlockingTest {
             //given
             val cityName = "saigon"
             val dao = database.getForecastDao()

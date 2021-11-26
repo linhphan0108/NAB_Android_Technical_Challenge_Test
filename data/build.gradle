@@ -32,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions{
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
@@ -44,8 +48,17 @@ dependencies {
     testImplementation TestDependencies.mockitoInline
     testImplementation TestDependencies.kotlinCoroutinesTest
     testImplementation TestDependencies.kotlinJunitTest
-//    androidTestImplementation TestDependencies.junitExt
-//    androidTestImplementation TestDependencies.espresso
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation TestDependencies.androidxExtJunit
+    androidTestImplementation TestDependencies.androidxCoreKtx
+    androidTestImplementation TestDependencies.androidxTestRunner
+    androidTestImplementation TestDependencies.androidxTestRule
+    androidTestImplementation TestDependencies.androidxCoreTesting
+    androidTestImplementation TestDependencies.kotlinCoroutinesTest
+    androidTestImplementation TestDependencies.truth
+    androidTestImplementation TestDependencies.mockitoDexMark
+//    androidTestImplementation TestDependencies.hamcrest
 
     //dependency injection
     implementation Others.hiltAndroid
