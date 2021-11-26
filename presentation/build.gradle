@@ -60,6 +60,7 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+            returnDefaultValues = true
         }
     }
 }
@@ -94,11 +95,14 @@ dependencies {
     androidTestImplementation TestDependencies.androidxCoreTesting
     androidTestImplementation TestDependencies.truth
     androidTestImplementation TestDependencies.mockitoDexMark
-    androidTestImplementation TestDependencies.espresso
+    androidTestImplementation (TestDependencies.espresso){
+        exclude group:"org.hamcrest"
+    }
     androidTestImplementation TestDependencies.hiltAndroidTest
     kaptAndroidTest Others.hiltAndroidCompiler
     debugImplementation TestDependencies.fragmentTest
     androidTestImplementation TestDependencies.hamcrest
+    implementation TestDependencies.espressoIdlingResource
 
     //dependency injection
     implementation Others.hiltAndroid
@@ -106,7 +110,6 @@ dependencies {
     testImplementation TestDependencies.hiltAndroidTest
     kaptTest Others.hiltAndroidCompiler
     androidTestImplementation TestDependencies.hiltAndroidTest
-    kaptAndroidTest Others.hiltAndroidCompiler
 
     // scalable size unit
     implementation(Others.sdp)
