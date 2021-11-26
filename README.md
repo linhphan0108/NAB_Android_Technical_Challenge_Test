@@ -253,6 +253,8 @@ Instrumented tests using Robolectric with AndroidJunit4 + AndroidX Test APIs
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/test/java/com/linhphan/presentation/feature)
 and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature/home/viewmodel)
 
+Instrumented tests for Room Dao Object (database access object) [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/androidTest/java/com/linhphan/data/loca/ForecastDaoTest.kt)
+
 Ui tests using Expresso
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature)
 
