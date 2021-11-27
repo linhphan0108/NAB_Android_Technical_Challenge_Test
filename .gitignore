@@ -16,5 +16,5 @@
 local.properties
 /buildSrc/build
 /buildSrc/.gradle
-keystore.properties
+#keystore.properties
 keystore.jks
