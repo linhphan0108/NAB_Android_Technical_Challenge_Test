@@ -261,7 +261,9 @@ Ui tests using Expresso + data binding + Hilt
 ## How to Run
 1. Clone the project down to your computer.
 2. Open it in Android Studio (Android Studio 4.0 or newer are recommended)
-3. Or just play with this [**apk**](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/docs/weather-forecast-LP-1.0.0-debug.apk)
+3. To build debug version you just need to click on the play button on Android Studio.
+4. To build release version you need to use your signed key and modify the file [keystore.properties](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/keystore.properties) respectively.
+5. Or just play with this [**apk**](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/docs/weather-forecast-LP-1.0.0-debug.apk)
 
 ## Demo
 <div align="center">
