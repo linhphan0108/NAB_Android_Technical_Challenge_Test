@@ -255,8 +255,8 @@ and [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/t
 
 Instrumented tests for Room Dao Object (database access object) [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/blob/master/data/src/androidTest/java/com/linhphan/data/loca/ForecastDaoTest.kt)
 
-Ui tests using Expresso
-[see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation/feature)
+Ui tests using Expresso + data binding + Hilt
+[see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation)
 
 ## How to Run
 1. Clone the project down to your computer.
