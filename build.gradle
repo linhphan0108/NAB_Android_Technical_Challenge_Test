@@ -13,6 +13,16 @@ buildscript {
     }
 }
 
+allprojects {
+    configurations.all {
+        resolutionStrategy.dependencySubstitution {
+            //to fix the issue
+            //Duplicate class org.hamcresDuplicate class org.hamcrest.BaseDescription found in modules jetified-hamcrest-core-1.3.jart.MatcherAssert found in modules jetified-hamcrest-all
+            substitute module(TestDependencies.hamcrestCore) with module(TestDependencies.junit4)
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

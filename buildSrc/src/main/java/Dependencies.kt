@@ -1,4 +1,5 @@
 import Versions.androidx_test_version
+import Versions.espresso_version
 import Versions.kotlin_version
 import Versions.lifecycle_version
 import Versions.mockito_version
@@ -24,6 +25,7 @@ object Versions{
     const val scalable_unit_version = "1.0.6"
     const val mockito_version = "4.0.0"
     const val androidx_test_version = "1.4.0"
+    const val espresso_version = "3.4.0"
 }
 
 object TopLevelDependencies{
@@ -62,9 +64,11 @@ object TestDependencies{
     const val hiltAndroidTest = "com.google.dagger:hilt-android-testing:${Versions.hilt_version}"
 
     const val mockitoDexMark = "com.linkedin.dexmaker:dexmaker-mockito-inline:2.28.1"
-    const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
+    const val espresso = "androidx.test.espresso:espresso-core:$espresso_version"
+    const val espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$espresso_version"
     const val fragmentTest = "androidx.fragment:fragment-testing:$androidx_test_version"
     const val hamcrest = "org.hamcrest:hamcrest-all:1.3"
+    const val hamcrestCore = "org.hamcrest:hamcrest-core:1.3"
 }
 
 object Others{
