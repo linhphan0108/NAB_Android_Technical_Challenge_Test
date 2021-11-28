@@ -48,6 +48,7 @@ dependencies {
     testImplementation TestDependencies.mockitoInline
     testImplementation TestDependencies.kotlinCoroutinesTest
     testImplementation TestDependencies.kotlinJunitTest
+    testImplementation TestDependencies.hamcrest
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation TestDependencies.androidxExtJunit
@@ -58,7 +59,6 @@ dependencies {
     androidTestImplementation TestDependencies.kotlinCoroutinesTest
     androidTestImplementation TestDependencies.truth
     androidTestImplementation TestDependencies.mockitoDexMark
-//    androidTestImplementation TestDependencies.hamcrest
 
     //dependency injection
     implementation Others.hiltAndroid
