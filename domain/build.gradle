@@ -42,8 +42,7 @@ dependencies {
     testImplementation TestDependencies.mockitoInline
     testImplementation TestDependencies.kotlinCoroutinesTest
     testImplementation TestDependencies.kotlinJunitTest
-//    androidTestImplementation TestDependencies.junitExt
-//    androidTestImplementation TestDependencies.espresso
+    testImplementation TestDependencies.hamcrest
 
     //dependency injection
     implementation Others.hiltAndroid

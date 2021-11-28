@@ -81,6 +81,7 @@ dependencies {
     testImplementation TestDependencies.robolectric
     testImplementation TestDependencies.mockitoCore
     testImplementation TestDependencies.mockitoInline
+    testImplementation TestDependencies.hamcrest
 
     // AndroidX Test - JVM testing
     testImplementation TestDependencies.androidxCoreKtx
