@@ -117,7 +117,9 @@ fun Context.isEmulator(): Boolean {
     }catch (e: Exception){
         Logger.e("isEmulator", e.message, e)
     }
-    return "sdk" == Build.PRODUCT || "google_sdk" == Build.PRODUCT || androidId == null
+    return androidId == null
+            || "sdk" == Build.PRODUCT || "google_sdk" == Build.PRODUCT
+            || "sdk_gphone_x86" == Build.PRODUCT || "generic_x86" == Build.DEVICE
 }
 
 // executes a command on the system
