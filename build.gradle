@@ -1,5 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext.jacocoVersion = '0.8.7'
     repositories {
         google()
         mavenCentral()
@@ -8,6 +9,7 @@ buildscript {
         classpath TopLevelDependencies.gradleBuildTool
         classpath TopLevelDependencies.kotlinGradlePlugin
         classpath TopLevelDependencies.hiltGradlePlugin
+        classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -19,6 +21,11 @@ allprojects {
             //to fix the issue
             //Duplicate class org.hamcresDuplicate class org.hamcrest.BaseDescription found in modules jetified-hamcrest-core-1.3.jart.MatcherAssert found in modules jetified-hamcrest-all
             substitute module(TestDependencies.hamcrestCore) with module(TestDependencies.junit4)
+        }
+        resolutionStrategy.eachDependency { details ->
+            if ('org.jacoco' == details.requested.group) {
+                details.useVersion "0.8.7"
+            }
         }
     }
 }
