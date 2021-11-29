@@ -1,5 +1,6 @@
 import Versions.androidx_test_version
 import Versions.espresso_version
+import Versions.jacoco_version
 import Versions.kotlin_version
 import Versions.lifecycle_version
 import Versions.mockito_version
@@ -26,12 +27,14 @@ object Versions{
     const val mockito_version = "4.0.0"
     const val androidx_test_version = "1.4.0"
     const val espresso_version = "3.4.0"
+    const val jacoco_version = "0.8.7"
 }
 
 object TopLevelDependencies{
     const val gradleBuildTool = "com.android.tools.build:gradle:7.0.3"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
+    const val jacoco = "org.jacoco:org.jacoco.core:$jacoco_version"
 }
 
 object Androidx{
