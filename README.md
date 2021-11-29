@@ -258,6 +258,16 @@ Instrumented tests for Room Dao Object (database access object) [see](https://gi
 Ui tests using Expresso + data binding + Hilt
 [see](https://github.com/linhphan0108/NAB_Android_Technical_Challenge_Test/tree/master/presentation/src/androidTest/java/com/linhphan/presentation)
 
+## Test coverage for unit tests
+The project contains additional configuration for Jacoco that enables coverage report for Unit Tests (initially Jacoco reports cover Android Instrumentation Tests).
+To run tests coverage, from the project directory WeatherForecast execute:
+```gradle
+./gradlew testDebugUnitTestCoverage
+// or 
+./gradlew -stacktrace --info testDebugUnitTestCoverage
+```
+The coverage report can be found in WeatherForecast/build/coverage-report/index.html
+
 ## How to Run
 1. Clone the project down to your computer.
 2. Open it in Android Studio (Android Studio 4.0 or newer are recommended)
