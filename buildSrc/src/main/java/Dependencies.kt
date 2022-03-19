@@ -22,7 +22,7 @@ object Versions{
     const val hilt_version = "2.40.1"
     const val retrofit_version = "2.9.0"
     const val lifecycle_version = "2.4.0"
-    const val room_version = "2.3.0"
+    const val room_version = "2.4.2"
     const val scalable_unit_version = "1.0.6"
     const val mockito_version = "4.0.0"
     const val androidx_test_version = "1.4.0"
@@ -31,7 +31,7 @@ object Versions{
 }
 
 object TopLevelDependencies{
-    const val gradleBuildTool = "com.android.tools.build:gradle:7.0.3"
+    const val gradleBuildTool = "com.android.tools.build:gradle:7.1.2"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
     const val jacoco = "org.jacoco:org.jacoco.core:$jacoco_version"
